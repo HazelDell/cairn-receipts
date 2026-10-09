@@ -1,0 +1,25 @@
+{
+  "event_id": "synthetic-candidate",
+  "kind": "benchmark",
+  "task_id": "synthetic-task",
+  "occurred_at": "2026-10-09T18:00:00Z",
+  "who": "Synthetic contributor",
+  "what": "Review fixture",
+  "where": "Local fixture",
+  "when": "Synthetic timestamp",
+  "why": "Test receipts",
+  "how": "No inference or remote call",
+  "artifacts": [
+    "result.txt"
+  ],
+  "benchmark": {
+    "hardware": "SYNTHETIC-HOST",
+    "model": "fixture-model",
+    "model_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "workload": "pp128",
+    "metric": "prompt_eval",
+    "unit": "tokens/second",
+    "value": 15,
+    "variant": "synthetic-candidate"
+  }
+}

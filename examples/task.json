@@ -1,0 +1,16 @@
+{
+  "event_id": "one",
+  "kind": "task_state",
+  "task_id": "synthetic-task",
+  "occurred_at": "2026-10-09T18:00:00Z",
+  "who": "Synthetic contributor",
+  "what": "Review fixture",
+  "where": "Local fixture",
+  "when": "Synthetic timestamp",
+  "why": "Test receipts",
+  "how": "No inference or remote call",
+  "artifacts": [
+    "result.txt"
+  ],
+  "state": "working"
+}

@@ -1,0 +1,1 @@
+SYNTHETIC fixture. No actual inference, task dispatch or benchmark performed.
