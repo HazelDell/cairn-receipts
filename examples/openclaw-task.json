@@ -1,0 +1,1 @@
+{"taskId":"synthetic-task-only","createdAt":1791568800000,"updatedAt":1791568860000,"state":"succeeded","events":[{"id":1,"state":"accepted","progress":0,"final":false},{"id":2,"state":"running","progress":0.5,"final":false},{"id":3,"state":"succeeded","progress":1,"final":true}]}

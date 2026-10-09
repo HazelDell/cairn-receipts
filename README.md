@@ -52,3 +52,17 @@ No outbound messages, uploads, inference calls or worker dispatch. The CLI only 
 ## Contribute
 
 Fork, modify, commit and open a pull request. Keep examples synthetic. Add a failing test for behavioral fixes and state what the check proves. Useful next work: real A2A/Beacon fixture adapters, independent tail witnesses, schema version migration, crash-injection tests and portable locking. Do not label those completed without evidence. MIT licensed; see LICENSE.
+
+## Offline OpenClaw snapshot adapter
+
+`openclaw_snapshot.py` handles a saved TaskRecord from [Stephen's source at commit 5df5563](https://github.com/StephenLReed/openclaw-a2a-server/blob/5df556381e813be0e5786108f65720f1fbd53aee/src/types.ts). It maps accepted/queued to submitted, running to working, succeeded to completed, failed/canceled directly, and expired to unknown. Original state stays explicit in `how`, and the whole source snapshot remains an artifact. No connection, credentials, streaming adapter or dispatch is involved.
+
+```sh
+python3 openclaw_snapshot.py --workspace examples --snapshot openclaw-task.json --instance synthetic-demo --observed-at 2026-10-09T18:00:00Z --actor "Synthetic reviewer" --out run/openclaw-demo
+python3 cairn_receipts.py record --workspace examples --ledger run/openclaw.jsonl --event run/openclaw-demo/event-0001.json
+python3 cairn_receipts.py record --workspace examples --ledger run/openclaw.jsonl --event run/openclaw-demo/event-0002.json
+python3 cairn_receipts.py record --workspace examples --ledger run/openclaw.jsonl --event run/openclaw-demo/event-0003.json
+python3 cairn_receipts.py replay --ledger run/openclaw.jsonl
+```
+
+The upstream event objects have IDs but no individual timestamps. The adapter uses your explicit observation clock and says so; it does not fabricate execution times from the task-level updatedAt value. Namespace every source instance to avoid task-ID collisions. Repeated snapshot observations at different times are not silently duplicates: changed receipt content requires explicit identity/revision handling. Do not collect repeatedly changing full snapshots without an ingestion policy. Future events changing an existing source event require diagnosis rather than overwriting history.
